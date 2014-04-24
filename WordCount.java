@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.*;
         
@@ -37,7 +36,6 @@ public class WordCount {
             sum += val.get();
         }
         context.write(key, new IntWritable(sum));
-        System.out.println(key+":"+new IntWritable(sum));
     }
  }
         
