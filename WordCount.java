@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 import java.util.*;
         
@@ -19,13 +18,11 @@ public class WordCount {
     private Text word = new Text();
         
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-    	System.out.println("in mapper");
         String line = value.toString();
         StringTokenizer tokenizer = new StringTokenizer(line);
         while (tokenizer.hasMoreTokens()) {
             word.set(tokenizer.nextToken());
             context.write(word, one);
-            System.out.println(word+":"+one);
         }
     }
  } 
@@ -34,11 +31,9 @@ public class WordCount {
 
     public void reduce(Text key, Iterable<IntWritable> values, Context context) 
       throws IOException, InterruptedException {
-    	System.out.println("in reducer");
     	
         int sum = 0;
         for (IntWritable val : values) {
-        	System.out.println("in reducer"+ val);
             sum += val.get();
         }
         context.write(key, new IntWritable(sum));
@@ -50,9 +45,8 @@ public class WordCount {
 	 System.out.println("in main");
     Configuration conf = new Configuration();
         
-        Job job = new Job(conf, "wordcount");
-        job.setJarByClass(WordCount.class);
-        //Path intermediateInfo = new Path("out");
+    Job job = new Job(conf, "wordcount");
+    job.setJarByClass(WordCount.class);
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
         
