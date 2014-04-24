@@ -40,7 +40,6 @@ public class WordCount {
  }
         
  public static void main(String[] args) throws Exception {
-	 System.out.println("in main");
     Configuration conf = new Configuration();
         
     Job job = new Job(conf, "wordcount");
